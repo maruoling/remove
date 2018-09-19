@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>消方块</title>
+    <style>
+        #box{
+            width: 500px;
+            height: 500px;
+            border: 1px solid #000;
+            background-image:url("1.jpg") ;
+            background-size: 100% 100%;
+            position: relative;
+        }
+        #box div{
+            width: 50px;
+            height: 50px;
+            background: url("2.jpg");
+            background-size: 100% 100%;
+            position: absolute;
+            /*float: left;*/
+            /*注意：这里的兼容，前提是你要支持才行*/
+            transition: 1s;
+            -webkit-transition: 1s;     /*兼容google浏览器*/
+            -moz-transition: 1s;        /*兼容firefox浏览器*/
+            -ms-transition: 1s;         /*兼容IE浏览器*/
+            -o-transition: 1s;          /*兼容opera浏览器*/
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+
+
+    <script>
+        var box=document.getElementById("box");
+        var str="";
+        var l=0;
+        var t=0;
+        //循环出100个小div
+        for (var i=0;i<100;i++){
+            //计算一下
+            l=(i%10)*50;
+            t=Math.floor(i/10)*50;
+            str+="<div style='left: "+l+"px;top:"+t+"px;'></div>";
+        }
+        box.innerHTML=str;
+
+        //对每一个小的div都添加一个事件
+        var divs=box.getElementsByTagName("div");
+        for (var i=0;i<divs.length;i++){
+            divs[i].onmouseover=function () {
+                //透明度
+                //this.style.opacity=0;
+                this.style.webkitTransform="scale(0)";
+            }
+        }
+    </script>
+</body>
+</html>
